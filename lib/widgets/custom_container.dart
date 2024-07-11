@@ -15,7 +15,7 @@ class CustomContainer extends StatelessWidget {
     return Container(
       height: height,
       width: width,
-      padding: padding ?? const EdgeInsets.all(10),
+      padding: padding ?? const EdgeInsets.all(16),
       margin: margin,
       decoration: BoxDecoration(
         color: whiteColor,

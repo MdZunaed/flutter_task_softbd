@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task_softbd/controllers/nav_bar_controller.dart';
+import 'package:flutter_task_softbd/controllers/paragraph_controller.dart';
 import 'package:flutter_task_softbd/screens/nav_bar_screen.dart';
 import 'package:flutter_task_softbd/utility/app_colors.dart';
 import 'package:get/get.dart';
+
+import 'controllers/date_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,8 +25,6 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           fontFamily: "NotoSansBengali",
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
-          //appBarTheme: AppBarTheme(color: Colors.white),
-          //bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: Colors.white),
           scaffoldBackgroundColor: Colors.white,
           inputDecorationTheme: InputDecorationTheme(
             filled: true,
@@ -49,5 +50,7 @@ class ControllerBindings extends Bindings {
   @override
   void dependencies() {
     Get.put(NavBarController());
+    Get.put(DateController());
+    Get.put(ParagraphController());
   }
 }

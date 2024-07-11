@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task_softbd/controllers/nav_bar_controller.dart';
+import 'package:flutter_task_softbd/controllers/paragraph_controller.dart';
 import 'package:flutter_task_softbd/screens/nav_calendar_screen.dart';
 import 'package:flutter_task_softbd/screens/nav_home_screen.dart';
 import 'package:flutter_task_softbd/utility/app_colors.dart';
@@ -15,6 +16,14 @@ class NavBarScreen extends StatefulWidget {
 }
 
 class _NavBarScreenState extends State<NavBarScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Get.find<ParagraphController>().getParagraph();
+    });
+    super.initState();
+  }
+
   List screens = [
     const NavHomeScreen(),
     const NavCalendarScreen(),
