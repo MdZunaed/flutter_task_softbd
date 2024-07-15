@@ -14,13 +14,13 @@ class BengaliDateFormatter {
     12: 'ডিসেম্বর',
   };
   static final Map<int, String> _bengaliWeekdays = {
-    1: 'রবি',
-    2: 'সোম',
-    3: 'মঙ্গল',
-    4: 'বুধ',
-    5: 'বৃহ',
-    6: 'শুক্র',
-    7: 'শনি',
+    1: 'সোম',
+    2: 'মঙ্গল',
+    3: 'বুধ',
+    4: 'বৃহ',
+    5: 'শুক্র',
+    6: 'শনি',
+    7: 'রবি',
   };
 
   static final List<String> _bengaliNumbers = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
