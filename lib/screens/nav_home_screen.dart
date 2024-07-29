@@ -17,7 +17,7 @@ class NavHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
@@ -102,7 +102,8 @@ class NavHomeScreen extends StatelessWidget {
                 children: [
                   SvgPicture.asset(calendar, height: 15),
                   const SizedBox(width: 5),
-                  const Text("১ই জানুয়ারি ২০২৪ - ৩১ই জানুয়ারি ২০৩০", style: bodySmallTextStyle),
+                  const Text("১ই জানুয়ারি ২০২৪ - ৩১ই জানুয়ারি ২০৩০",
+                      style: bodySmallTextStyle),
                 ],
               ),
               const SizedBox(height: 8),
@@ -127,7 +128,11 @@ class NavHomeScreen extends StatelessWidget {
     return Column(
       children: [
         Row(
-          children: [MiniDateCard(text: cellOne), const SizedBox(width: 5), MiniDateCard(text: cellTwo)],
+          children: [
+            MiniDateCard(text: cellOne),
+            const SizedBox(width: 5),
+            MiniDateCard(text: cellTwo)
+          ],
         ),
         const SizedBox(height: 5),
         Text(name, style: bodySmallTextStyle.copyWith(fontSize: 14)),
