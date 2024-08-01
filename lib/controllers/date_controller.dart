@@ -12,7 +12,7 @@ class DateController extends GetxController {
 
   void generateDateRange() {
     List<DateTime> tempDates = [];
-    for (int i = -7; i <= 7; i++) {
+    for (int i = -3; i <= 3; i++) {
       tempDates.add(selectedDate.add(Duration(days: i)));
     }
     dates = tempDates;

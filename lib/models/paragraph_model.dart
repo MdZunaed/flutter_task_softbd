@@ -1,13 +1,13 @@
-class ParagraphModel {
-  List<Paragraph>? paragraphs;
+class ParagraphListModel {
+  List<ParagraphModel>? paragraphs;
 
-  ParagraphModel({this.paragraphs});
+  ParagraphListModel({this.paragraphs});
 
-  ParagraphModel.fromJson(Map<String, dynamic> json) {
+  ParagraphListModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      paragraphs = <Paragraph>[];
+      paragraphs = <ParagraphModel>[];
       json['data'].forEach((v) {
-        paragraphs!.add(Paragraph.fromJson(v));
+        paragraphs!.add(ParagraphModel.fromJson(v));
       });
     }
   }
@@ -21,15 +21,15 @@ class ParagraphModel {
   }
 }
 
-class Paragraph {
+class ParagraphModel {
   String? date;
   String? name;
   String? category;
   String? location;
 
-  Paragraph({this.date, this.name, this.category, this.location});
+  ParagraphModel({this.date, this.name, this.category, this.location});
 
-  Paragraph.fromJson(Map<String, dynamic> json) {
+  ParagraphModel.fromJson(Map<String, dynamic> json) {
     date = json['date'];
     name = json['name'];
     category = json['category'];

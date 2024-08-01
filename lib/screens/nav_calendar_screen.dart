@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task_softbd/controllers/paragraph_controller.dart';
+import 'package:flutter_task_softbd/models/paragraph_model.dart';
 import 'package:flutter_task_softbd/screens/add_paragraph_screen.dart';
 import 'package:flutter_task_softbd/utility/app_colors.dart';
 import 'package:flutter_task_softbd/utility/app_strings.dart';
@@ -30,7 +31,9 @@ class NavCalendarScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("আজ, $todayDate", style: bodyTitleStyle),
-                RoundedButton(text: "নতুন যোগ করুন", onTap: () => Get.to(const AddParagraphScreen())),
+                RoundedButton(
+                    text: "নতুন যোগ করুন",
+                    onTap: () => Get.to(() => const AddParagraphScreen())),
               ],
             ),
             const SizedBox(height: 20),
@@ -56,7 +59,9 @@ class NavCalendarScreen extends StatelessWidget {
                         margin: const EdgeInsets.all(4.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          border: isSelected ? Border.all(color: primaryColor, width: 2) : null,
+                          border: isSelected
+                              ? Border.all(color: primaryColor, width: 2)
+                              : null,
                         ),
                         alignment: Alignment.center,
                         child: Text(
@@ -87,14 +92,17 @@ class NavCalendarScreen extends StatelessWidget {
                   ListView.separated(
                     primary: false,
                     shrinkWrap: true,
-                    itemCount: 9,
+                    itemCount: controller.paragraphs?.length ?? 0,
                     separatorBuilder: (c, i) => const SizedBox(height: 10),
                     itemBuilder: (context, index) {
                       bool even = index % 2 == 0;
                       final paragraph = controller.paragraphs?[index];
-                      var date = DateTime.fromMillisecondsSinceEpoch(int.parse(paragraph?.date ?? '') * 1000);
+                      var date = DateTime.fromMillisecondsSinceEpoch(
+                          int.parse(paragraph?.date ?? '') * 1000);
+                      //* 1000
                       var formattedDate = "${date.hour}:${date.minute} মি.";
-                      var dateInBengali = BengaliDateFormatter.convertToBengali(formattedDate);
+                      var dateInBengali =
+                          BengaliDateFormatter.convertToBengali(formattedDate);
                       String timeOfDay = BengaliDateFormatter.getBengaliTimeOfDay(date);
                       return Row(
                         children: [
@@ -113,6 +121,13 @@ class NavCalendarScreen extends StatelessWidget {
                               text: paragraph?.name ?? "text",
                               category: paragraph?.category ?? "বাক্য",
                               location: paragraph?.location ?? "ঢাকা, বাংলাদেশ",
+                              onTapDelete: () => controller.deleteParagraph(index),
+                              onTapEdit: () {
+                                Get.to(AddParagraphScreen(
+                                    isUpdating: true,
+                                    paragraph: paragraph,
+                                    index: index));
+                              },
                             ),
                           ),
                         ],

@@ -58,13 +58,15 @@ class _NavBarScreenState extends State<NavBarScreen> {
                     BottomNavigationBarItem(
                         icon: Padding(
                             padding: const EdgeInsets.only(top: 8),
-                            child: SvgPicture.asset(controller.currentIndex == 0 ? homeFilled : home)),
+                            child: SvgPicture.asset(
+                                controller.currentIndex == 0 ? homeFilled : home)),
                         label: ''),
                     BottomNavigationBarItem(
                         icon: Padding(
                             padding: const EdgeInsets.only(right: 40, top: 8),
-                            child:
-                                SvgPicture.asset(controller.currentIndex == 1 ? calendarFilled : calendar)),
+                            child: SvgPicture.asset(controller.currentIndex == 1
+                                ? calendarFilled
+                                : calendar)),
                         label: ''),
                     BottomNavigationBarItem(
                         icon: Padding(
@@ -72,8 +74,9 @@ class _NavBarScreenState extends State<NavBarScreen> {
                             child: SvgPicture.asset(timeline)),
                         label: ''),
                     BottomNavigationBarItem(
-                        icon:
-                            Padding(padding: const EdgeInsets.only(top: 8), child: SvgPicture.asset(person)),
+                        icon: Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: SvgPicture.asset(person)),
                         label: ''),
                   ],
                   currentIndex: controller.currentIndex,
@@ -94,7 +97,24 @@ class _NavBarScreenState extends State<NavBarScreen> {
 
   GestureDetector floatingCameraButton() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Demo"),
+              content: const Text("This is just a demo"),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    child: const Text("Ok"))
+              ],
+            );
+          },
+        );
+      },
       child: Container(
         height: 60,
         width: 60,
@@ -105,7 +125,10 @@ class _NavBarScreenState extends State<NavBarScreen> {
           //border: Border.all(color: Colors.black.withOpacity(0.05), width: 5),
           gradient: appGradient,
           boxShadow: [
-            BoxShadow(offset: const Offset(0, 4), color: Colors.black.withOpacity(0.3), blurRadius: 5)
+            BoxShadow(
+                offset: const Offset(0, 4),
+                color: Colors.black.withOpacity(0.3),
+                blurRadius: 5)
           ],
         ),
         child: SvgPicture.asset(camera),

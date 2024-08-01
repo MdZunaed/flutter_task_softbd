@@ -40,6 +40,9 @@ class MyApp extends StatelessWidget {
             disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: const BorderSide(color: greyBorderColor, width: 1)),
+            errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: redColor, width: 1)),
           )),
       home: const NavBarScreen(),
     );

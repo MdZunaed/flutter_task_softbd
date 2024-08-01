@@ -8,18 +8,41 @@ import 'package:http/http.dart';
 
 class ParagraphController extends GetxController {
   bool inProgress = false;
-  ParagraphModel _paragraphModel = ParagraphModel();
-  List<Paragraph>? get paragraphs => _paragraphModel.paragraphs;
+  ParagraphListModel _paragraphModel = ParagraphListModel();
+  List<ParagraphModel>? get paragraphs => _paragraphModel.paragraphs;
 
   Future<void> getParagraph() async {
     inProgress = true;
     update();
     final response = await get(Uri.parse(Urls.baseUrl));
     if (response.statusCode == 200) {
-      _paragraphModel = ParagraphModel.fromJson(jsonDecode(response.body));
+      _paragraphModel = ParagraphListModel.fromJson(jsonDecode(response.body));
       log(paragraphs![0].date.toString());
     } else {}
     inProgress = false;
+    update();
+  }
+
+  addNewParagraph(ParagraphModel paragraph) {
+    paragraphs?.add(paragraph);
+    update();
+  }
+
+  updateParagraph(
+      {required int index,
+      required name,
+      required category,
+      required location,
+      required date}) {
+    paragraphs?.elementAt(index).name = name;
+    paragraphs?.elementAt(index).category = category;
+    paragraphs?.elementAt(index).location = location;
+    paragraphs?.elementAt(index).date = date;
+    update();
+  }
+
+  deleteParagraph(index) {
+    paragraphs?.removeAt(index);
     update();
   }
 }

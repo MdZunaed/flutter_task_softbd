@@ -15,6 +15,14 @@ class NavHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<HomeMenuItem> menuItems = [
+      HomeMenuItem(name: "০০০১", image: menuOne),
+      HomeMenuItem(name: "০০০২", image: menuTwo),
+      HomeMenuItem(name: "০০০৩", image: menuThree),
+      HomeMenuItem(name: "০০০৪", image: menuFour),
+      HomeMenuItem(name: "০০০৫", image: menuFive),
+      HomeMenuItem(name: "০০০৬", image: menuSix),
+    ];
     return Scaffold(
       appBar: appBar(),
       body: SingleChildScrollView(
@@ -26,23 +34,41 @@ class NavHomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
             timeCountSection(),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                menuItemCard(name: "০০০১", image: menuOne),
-                menuItemCard(name: "০০০২", image: menuTwo),
-                menuItemCard(name: "০০০৩", image: menuThree),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                menuItemCard(name: "০০০৪", image: menuFour),
-                menuItemCard(name: "০০০৫", image: menuFive),
-                menuItemCard(name: "০০০৬", image: menuSix),
-              ],
-            ),
+            GridView.builder(
+              itemCount: menuItems.length,
+              primary: false,
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, childAspectRatio: 1 / 1.4),
+              itemBuilder: (context, index) {
+                return menuItemCard(
+                  name: menuItems[index].name,
+                  image: menuItems[index].image,
+                  onTap: () {
+                    Get.snackbar(menuItems[index].name, '',
+                        duration: const Duration(milliseconds: 900),
+                        backgroundColor: primaryColor);
+                  },
+                );
+              },
+            )
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     menuItemCard(name: "০০০১", image: menuOne,onTap:(){}),
+            //     menuItemCard(name: "০০০২", image: menuTwo),
+            //     menuItemCard(name: "০০০৩", image: menuThree),
+            //   ],
+            // ),
+            // const SizedBox(height: 20),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     menuItemCard(name: "০০০৪", image: menuFour),
+            //     menuItemCard(name: "০০০৫", image: menuFive),
+            //     menuItemCard(name: "০০০৬", image: menuSix),
+            //   ],
+            // ),
           ],
         ),
       ),
@@ -50,7 +76,8 @@ class NavHomeScreen extends StatelessWidget {
   }
 
   Widget menuItemCard({required name, required image, onTap}) {
-    return GestureDetector(
+    return InkWell(
+      borderRadius: BorderRadius.circular(20),
       onTap: onTap,
       child: Column(
         children: [
@@ -192,4 +219,10 @@ class NavHomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class HomeMenuItem {
+  String name;
+  String image;
+  HomeMenuItem({required this.name, required this.image});
 }

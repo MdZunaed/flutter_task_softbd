@@ -23,10 +23,25 @@ class BengaliDateFormatter {
     7: 'রবি',
   };
 
-  static final List<String> _bengaliNumbers = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  static final List<String> _bengaliNumbers = [
+    '০',
+    '১',
+    '২',
+    '৩',
+    '৪',
+    '৫',
+    '৬',
+    '৭',
+    '৮',
+    '৯'
+  ];
 
   static String _convertToBengaliNumber(int number) {
-    return number.toString().split('').map((char) => _bengaliNumbers[int.parse(char)]).join('');
+    return number
+        .toString()
+        .split('')
+        .map((char) => _bengaliNumbers[int.parse(char)])
+        .join('');
   }
 
   static String format(DateTime date) {
@@ -36,6 +51,18 @@ class BengaliDateFormatter {
     final weekday = _bengaliWeekdays[date.weekday]!;
 
     return '$day $month';
+    //return '$weekday, $day $month $year';
+  }
+
+  static String formatFullDate(DateTime date) {
+    final day = _convertToBengaliNumber(date.day);
+    final month = _bengaliMonths[date.month]!;
+    final year = _convertToBengaliNumber(date.year);
+    final hour = _convertToBengaliNumber(date.hour);
+    final minute = _convertToBengaliNumber(date.minute);
+    final weekday = _bengaliWeekdays[date.weekday]!;
+
+    return '$day $month $year $hour:$minute';
     //return '$weekday, $day $month $year';
   }
 

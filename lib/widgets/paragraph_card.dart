@@ -11,13 +11,18 @@ class ParagraphCard extends StatelessWidget {
   final String text;
   final String category;
   final String location;
-  const ParagraphCard(
-      {super.key,
-      required this.even,
-      required this.time,
-      required this.text,
-      required this.category,
-      required this.location});
+  final VoidCallback onTapEdit;
+  final VoidCallback onTapDelete;
+  const ParagraphCard({
+    super.key,
+    required this.even,
+    required this.time,
+    required this.text,
+    required this.category,
+    required this.location,
+    required this.onTapEdit,
+    required this.onTapDelete,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +41,23 @@ class ParagraphCard extends StatelessWidget {
               SvgPicture.asset(clock),
               const SizedBox(width: 5),
               Text(time, style: bodyTextStyle.copyWith(color: whiteColor)),
+              const Spacer(),
+              Row(
+                children: [
+                  InkWell(
+                    onTap: onTapDelete,
+                    child: const Icon(Icons.delete, size: 20, color: Colors.white),
+                  ),
+                  const SizedBox(width: 10),
+                  InkWell(
+                    onTap: onTapEdit,
+                    child: const Icon(Icons.edit, size: 20, color: Colors.white),
+                  ),
+                ],
+              ),
             ],
           ),
-          const SizedBox(height: 3),
+          const SizedBox(height: 4),
           Text(text, style: bodyTitleStyle.copyWith(color: whiteColor)),
           const SizedBox(height: 3),
           Text(category, style: bodyTextStyle.copyWith(color: whiteColor)),

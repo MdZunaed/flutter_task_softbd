@@ -14,6 +14,8 @@ class TitledTextField extends StatelessWidget {
   final BoxConstraints? constraints;
   final TextInputType? textInputType;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
+  final VoidCallback? onTap;
   const TitledTextField(
       {super.key,
       required this.title,
@@ -26,7 +28,9 @@ class TitledTextField extends StatelessWidget {
       this.prefixIcon,
       this.maxLines,
       this.textInputType,
-      this.constraints});
+      this.constraints,
+      this.onTap,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -40,16 +44,20 @@ class TitledTextField extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 8),
-        TextField(
-          controller: controller,
-          enabled: enabled ?? true,
-          maxLines: maxLines,
-          keyboardType: textInputType,
-          decoration: InputDecoration(
-            hintText: hintText,
-            suffixIcon: suffixIcon,
-            prefixIcon: prefixIcon,
-            constraints: constraints,
+        GestureDetector(
+          onTap: onTap,
+          child: TextFormField(
+            validator: validator,
+            controller: controller,
+            enabled: enabled ?? true,
+            maxLines: maxLines,
+            keyboardType: textInputType,
+            decoration: InputDecoration(
+              hintText: hintText,
+              suffixIcon: suffixIcon,
+              prefixIcon: prefixIcon,
+              constraints: constraints,
+            ),
           ),
         ),
       ],
